@@ -10,6 +10,15 @@ class AddPlaceScreen extends StatefulWidget {
 class _AddPlaceState extends State<AddPlaceScreen> {
   final _formkey = GlobalKey<FormState>();
 
+  final _titleController = TextEditingController();
+
+  void _addItem() {
+    if (_formkey.currentState!.validate()) {
+      final title = _titleController.text;
+      print(title);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +29,11 @@ class _AddPlaceState extends State<AddPlaceScreen> {
         child: Form(
             key: _formkey,
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               child: Column(
                 children: [
                   TextFormField(
+                    controller: _titleController,
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface),
                     decoration: const InputDecoration(labelText: 'Título'),
@@ -36,7 +46,7 @@ class _AddPlaceState extends State<AddPlaceScreen> {
                   ),
                   const SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
                         onPressed: () {
@@ -44,9 +54,10 @@ class _AddPlaceState extends State<AddPlaceScreen> {
                         },
                         child: const Text('Limpar'),
                       ),
-                      ElevatedButton(
+                      ElevatedButton.icon(
                         onPressed: () {},
-                        child: const Text('Salvar'),
+                        icon: const Icon(Icons.add),
+                        label: const Text('Adicionar lugar'),
                       ),
                     ],
                   )
